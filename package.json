@@ -1,0 +1,17 @@
+{
+  "name": "buckettree",
+  "version": "1.0.0",
+  "description": "Generate clean ASCII trees for Bitbucket repos.",
+  "main": "index.js",
+  "homepage": "https://coder-ralph.github.io/BucketTree",
+  "scripts": {
+    "predeploy": "git add . && git commit -m \"Build and deploy\" || echo \"No changes to commit\"",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

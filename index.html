@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BucketTree Generator</title>
+    <link rel="icon" href="src/images/favicon.ico" sizes="any">
+    <link rel="stylesheet" href="src/styles/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>BucketTree Generator</h1>
+        <p>Generate clean ASCII trees for Bitbucket repos.</p>
+    </div>
+
+    <!-- Input Field -->
+    <div class="container">
+        <div class="input-section">
+            <div class="input-group">
+                <label for="repoUrl" class="input-label">Repository URL</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        class="input-field" 
+                        id="repoUrl" 
+                        placeholder="https://bitbucket.org/workspaceID/repository"
+                    >
+                    <button class="clear-btn" id="clearBtn" title="Clear input">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <button class="generate-btn" id="generateBtn">Generate</button>
+            </div>
+
+            <!-- Example Repositories -->
+            <div class="example-section">
+                <div class="example-title">Try these example repositories:</div>
+                <div class="example-buttons">
+                    <button class="example-btn" data-url="https://bitbucket.org/atlassian/atlaskit-mk-2">
+                        <svg class="example-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2.5 3.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H3.707L6.854 7.146a.5.5 0 1 1-.708.708L3 4.707V8a.5.5 0 0 1-1 0V3.5z"/>
+                            <path d="M7.5 8.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H8.707l3.147 3.146a.5.5 0 0 1-.708.708L8 9.707V13a.5.5 0 0 1-1 0V8.5z"/>
+                        </svg>
+                        atlaskit-mk-2
+                    </button>
+                    <button class="example-btn" data-url="https://bitbucket.org/atlassian/a11y-dashboard">
+                        <svg class="example-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2.5 3.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H3.707L6.854 7.146a.5.5 0 1 1-.708.708L3 4.707V8a.5.5 0 0 1-1 0V3.5z"/>
+                            <path d="M7.5 8.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H8.707l3.147 3.146a.5.5 0 0 1-.708.708L8 9.707V13a.5.5 0 0 1-1 0V8.5z"/>
+                        </svg>
+                        a11y-dashboard
+                    </button>
+                    <button class="example-btn" data-url="https://bitbucket.org/atlassian/apache-shindig">
+                        <svg class="example-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2.5 3.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H3.707L6.854 7.146a.5.5 0 1 1-.708.708L3 4.707V8a.5.5 0 0 1-1 0V3.5z"/>
+                            <path d="M7.5 8.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H8.707l3.147 3.146a.5.5 0 0 1-.708.708L8 9.707V13a.5.5 0 0 1-1 0V8.5z"/>
+                        </svg>
+                        apache-shindig
+                    </button>
+                    <button class="example-btn" data-url="https://bitbucket.org/atlassian/a11y-dashboard-webservice">
+                        <svg class="example-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2.5 3.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H3.707L6.854 7.146a.5.5 0 1 1-.708.708L3 4.707V8a.5.5 0 0 1-1 0V3.5z"/>
+                            <path d="M7.5 8.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H8.707l3.147 3.146a.5.5 0 0 1-.708.708L8 9.707V13a.5.5 0 0 1-1 0V8.5z"/>
+                        </svg>
+                        a11y-dashboard-webservice
+                    </button>
+                    <button class="example-btn" data-url="https://bitbucket.org/atlassian/atlassian-oauth">
+                        <svg class="example-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2.5 3.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H3.707L6.854 7.146a.5.5 0 1 1-.708.708L3 4.707V8a.5.5 0 0 1-1 0V3.5z"/>
+                            <path d="M7.5 8.5a.5.5 0 0 1 .5-.5h4.5a.5.5 0 0 1 0 1H8.707l3.147 3.146a.5.5 0 0 1-.708.708L8 9.707V13a.5.5 0 0 1-1 0V8.5z"/>
+                        </svg>
+                        atlassian-oauth
+                    </button>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage">
+                Enter a valid Bitbucket URL
+            </div>
+        </div>
+
+        <!-- Code Block -->
+        <div class="output-section">
+            <div class="output-container">
+                <div class="output-placeholder" id="outputPlaceholder">
+                    Generated tree will be displayed here...
+                </div>
+                <div class="output-tree" id="outputTree" style="display: none;"></div>
+                <div class="loading-overlay" id="loadingOverlay">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+
+            <!-- Copy & Export Button -->
+            <div class="actions" id="actions">
+                <button class="action-btn" id="copyBtn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                    </svg>
+                    Copy
+                </button>
+                <button class="action-btn" id="exportBtn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    Export README.md
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Made with ☕ by <a href="https://app.daily.dev/coderralph" target="_blank" rel="noopener noreferrer">Ralph Rosael</a></p>
+    </div>
+
+    <script src="src/generator/script.js"></script>
+</body>
+</html>
